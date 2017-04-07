@@ -147,7 +147,8 @@ public class BitbucketSCMProvider implements SCMProvider {
             break;
           }
 
-          String repoName = envVarProperty.getProperty("PROJECT_NAME") + "-" + repo.substring(repo.lastIndexOf("/") + 1, repo.indexOf(".git"));
+          String projectName = envVarProperty.getProperty("PROJECT_NAME").replaceAll('/','-')
+          String repoName = projectName + "-" + repo.substring(repo.lastIndexOf("/") + 1, repo.indexOf(".git"));
           println "REPO NAME: " + repoName
           String target_repo_name = repoNamespace + "/" + repoName
           int repo_exists=0;
