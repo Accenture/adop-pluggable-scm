@@ -160,7 +160,13 @@ public class GerritSCMProvider implements SCMProvider {
     repoList = (com.executeCommand(command1).split("\\r?\\n"));
 
     for(String repo: repoList) {
-        String repoName = repo.substring(repo.lastIndexOf("/") + 1, repo.indexOf(".git"));
+        int firstIndex = repo.lastIndexOf("/");
+        int lastIndex = repo.indexOf(".git");
+        if(firstIndex == -1 || lastIndex == -1 ) {
+          continue;
+        }
+ 
+        String repoName = repo.substring(firstIndex + 1, lastIndex);
         String target_repo_name= repoNamespace + "/" + repoName
         int repo_exists=0;
 
