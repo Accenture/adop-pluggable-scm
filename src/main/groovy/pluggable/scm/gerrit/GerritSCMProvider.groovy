@@ -255,10 +255,11 @@ public class GerritSCMProvider implements SCMProvider {
     **/
     @Override
     public Closure getMultibranch(String projectName, String repoName, String credentialId, Closure extras) {
-       if(extras == null) extras = {}
-        return {
+        if (extras == null) {
+            return {}
+        } else return {
             git extras >> {
-                remote(this.getScmUrl() + projectName + "/" + repoName + ".git" )
+                remote(this.getScmUrl() + projectName + "/" + repoName + ".git")
                 credentialsId(credentialId)
             }
         }
