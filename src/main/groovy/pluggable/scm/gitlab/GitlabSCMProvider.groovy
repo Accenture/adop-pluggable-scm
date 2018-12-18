@@ -106,15 +106,15 @@ class GitlabSCMProvider implements SCMProvider {
      * */
     @Override
     public Closure getMultibranch(String projectName, String repoName, String credentialId, Closure extras) {
-        if (extras == null) extras = {}
-        return {
+        if (extras == null) {
+            return {}
+        } else return {
             git extras >> {
                 remote(this.getScmUrl() + projectName + "/" + repoName + ".git")
                 credentialsId(credentialId)
             }
         }
     }
-
 
     /**
      * Returns a closure representation of the SCM provider's trigger SCM section for Jenkins DSL.
